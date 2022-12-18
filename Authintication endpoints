@@ -1,0 +1,16 @@
+/* Note: this is the endpoints for each authintication method for expert/user. */
+
+// public routes:
+// For Expert:
+Route::post('/expert/login', [ExpertsController::class, 'login']);
+Route::post('/expert/register', [ExpertsController::class, 'register']);
+// For User:
+Route::post('/user/login', [UsersController::class, 'login']);
+Route::post('/user/register', [UsersController::class, 'register']);
+
+// Protected routes:
+Route::group(['middleware' => ['auth:sanctum']], function()
+{
+    Route::post('/expert/logout', [ExpertsController::class, 'logout']);
+    Route::post('/user/logout', [UsersController::class, 'logout']);
+});
